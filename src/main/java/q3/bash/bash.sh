@@ -14,3 +14,10 @@ add_text_to_files() {
   echo "Text added to files."
 }
 
+replace_world_with_bash() {
+  for file in file*.txt; do
+    sed -i 's/world/bash/g' "$file"
+  done
+  echo "Word 'world' replaced with 'bash'."
+}
+
