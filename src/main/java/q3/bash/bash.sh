@@ -21,3 +21,28 @@ replace_world_with_bash() {
   echo "Word 'world' replaced with 'bash'."
 }
 
+show_menu() {
+  PS3="Select an option: "
+  select option in "Create Files" "Add Text to Files" "Replace 'world' with 'bash'" "Exit"; do
+    case $option in
+      "Create Files")
+        create_files
+        ;;
+      "Add Text to Files")
+        add_text_to_files
+        ;;
+      "Replace 'world' with 'bash'")
+        replace_world_with_bash
+        ;;
+      "Exit")
+        echo "Exiting."
+        exit 0
+        ;;
+      *)
+        echo "Invalid option. Please select again."
+        ;;
+    esac
+  done
+}
+
+show_menu
