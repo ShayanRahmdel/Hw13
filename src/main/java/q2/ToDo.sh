@@ -36,3 +36,22 @@ show_not_done_tasks(){
   cat -n "$TASKS_FILE"
 }
 
+delete_task(){
+  echo "Enter Task Number to Delete:"
+  read task_number
+
+  task=$(sed -n "${task_number}p" "$TASKS_FILE")
+  sed -i "${task_number}d" "$TASKS_FILE"
+  echo "$task" >> "$DELETED_FILE"
+  echo "Task Deleted."
+}
+add_pending_to_completed(){
+  echo "Enter Task Number to Add to Completed:"
+  read task_number
+
+  task=$(sed -n "${task_number}p" "$TASKS_FILE")
+  sed -i "${task_number}d" "$TASKS_FILE"
+  echo "$task" >> "$COMPLETED_FILE"
+  echo "Task Added to Completed."
+  }
+
