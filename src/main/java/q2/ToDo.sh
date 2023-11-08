@@ -26,3 +26,13 @@ show_deleted_tasks(){
   cat "$DELETED_FILE"
 }
 
+show_completed_tasks(){
+  echo "Completed Tasks:"
+  cat -n "$COMPLETED_FILE"
+}
+
+show_not_done_tasks(){
+  echo "Not Done Tasks:"
+  cat -n "$TASKS_FILE"
+}
+
