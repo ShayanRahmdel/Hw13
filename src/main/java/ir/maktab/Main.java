@@ -33,9 +33,25 @@ public class Main {
                 .stream()
                 .sorted(Comparator.comparing(Person::getUsername))
                 .toList();
+//
+//        for (Person person : sortByUsername) {
+//            System.out.println(person);
+//        }
 
-        for (Person person : sortByUsername) {
+        System.out.println("Q3==============");
+
+        List<Person> sortByAgeAndLastname = MockData
+                .getPeople()
+                .stream()
+                .sorted(Comparator.comparing(Person::getAge)
+                        .thenComparing(Person::getLastName)).toList();
+
+
+        for (Person person : sortByAgeAndLastname) {
             System.out.println(person);
         }
 
+
+
+    }
 }
