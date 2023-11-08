@@ -46,9 +46,21 @@ public class Main {
                 .sorted(Comparator.comparing(Person::getAge)
                         .thenComparing(Person::getLastName)).toList();
 
+//
+//        for (Person person : sortByAgeAndLastname) {
+//            System.out.println(person);
+//        }
 
-        for (Person person : sortByAgeAndLastname) {
-            System.out.println(person);
+
+        System.out.println("Q4==============");
+
+        Set<String> mapTOIpv4 = MockData.getPeople()
+                .stream()
+                .map(Person::getIpv4)
+                .collect(Collectors.toSet());
+
+        for (String map : mapTOIpv4) {
+            System.out.println(map);
         }
 
 
