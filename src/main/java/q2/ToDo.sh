@@ -15,3 +15,14 @@ show_menu(){
   echo "7. Exit"
 }
 
+add_task(){
+  echo "Enter new Task (to exit, press Ctrl+D):"
+  cat >> "$TASKS_FILE"
+  echo "Task saved."
+}
+
+show_deleted_tasks(){
+  echo "Deleted Tasks:"
+  cat "$DELETED_FILE"
+}
+
