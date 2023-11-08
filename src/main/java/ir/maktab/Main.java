@@ -21,10 +21,21 @@ public class Main {
                 .filter(a -> a.getAge() > 50)
                 .toList();
 
-        for (Person person : ageGreaterThan50) {
+//        for (Person person : ageGreaterThan50) {
+//            System.out.println(person);
+//        }
+
+
+        System.out.println("Q2==============");
+
+        List<Person> sortByUsername = MockData
+                .getPeople()
+                .stream()
+                .sorted(Comparator.comparing(Person::getUsername))
+                .toList();
+
+        for (Person person : sortByUsername) {
             System.out.println(person);
         }
 
-
-    }
 }
