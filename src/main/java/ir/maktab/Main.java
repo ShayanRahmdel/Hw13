@@ -81,6 +81,42 @@ public class Main {
         }
 
 
+        System.out.println("Q6=================");
 
+        List<Integer> ages = MockData.getPeople()
+                .stream()
+                .map(person -> {
+                    Date birthDate = null;
+                    try {
+                        birthDate = new SimpleDateFormat("dd/MM/yyyy").parse(person.getBirthDate());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    assert birthDate != null;
+                    return calculateAge(birthDate);
+                })
+                .toList();
+
+//        for (Integer age : ages) {
+//            System.out.print(age + " ");
+//        }
+
+        OptionalDouble averageAge = ages.stream()
+                .mapToDouble(Integer::doubleValue)
+                .average();
+
+        System.out.println(averageAge);
+
+
+    }
+
+    private static Integer calculateAge(Date birthDate) {
+        Date currentDate = new Date();
+
+        long diff = currentDate.getTime() - birthDate.getTime();
+        long ageInMillis = 1000L * 60 * 60 * 24 * 365;
+
+        return (int) (diff / ageInMillis);
     }
 }
