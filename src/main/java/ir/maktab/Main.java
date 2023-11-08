@@ -64,6 +64,23 @@ public class Main {
         }
 
 
+        System.out.println("Q5================");
+        Map<String, Person> question5 = MockData
+                .getPeople()
+                .stream()
+                .sorted(Comparator.comparing(Person::getLastName))
+                .filter(person -> person.getGender()
+                        .equals("Female") && person.getAge() > 40)
+                .dropWhile(name -> name.getFirstName().startsWith("A"))
+                .skip(5).limit(100)
+                .collect(Collectors.toMap(person -> person.getFirstName() + " " + person.getLastName(), person -> person, (existingPerson, newPerson) -> existingPerson));
+
+
+        for (Map.Entry<String, Person> p : question5.entrySet()) {
+            System.out.println(p.getKey() + ": " + p.getValue());
+        }
+
+
 
     }
 }
