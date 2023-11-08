@@ -7,3 +7,10 @@ create_files() {
   echo "Files created."
 }
 
+add_text_to_files() {
+  for file in file*.txt; do
+    echo "Hello world" >> "$file"
+  done
+  echo "Text added to files."
+}
+
