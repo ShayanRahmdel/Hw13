@@ -21,8 +21,10 @@ public class Main {
                 .filter(a -> a.getAge() > 50)
                 .toList();
 
+//        int index = 1;
 //        for (Person person : ageGreaterThan50) {
-//            System.out.println(person);
+//            System.out.println(index + ":" + person + " ");
+//            index++;
 //        }
 
 
@@ -58,10 +60,10 @@ public class Main {
                 .stream()
                 .map(Person::getIpv4)
                 .collect(Collectors.toSet());
-
-        for (String map : mapTOIpv4) {
-            System.out.println(map);
-        }
+//
+//        for (String map : mapTOIpv4) {
+//            System.out.println(map);
+//        }
 
 
         System.out.println("Q5================");
@@ -76,15 +78,15 @@ public class Main {
                 .collect(Collectors.toMap(person -> person.getFirstName() + " " + person.getLastName(), person -> person, (existingPerson, newPerson) -> existingPerson));
 
 
-        for (Map.Entry<String, Person> p : question5.entrySet()) {
-            System.out.println(p.getKey() + ": " + p.getValue());
-        }
+//        for (Map.Entry<String, Person> p : question5.entrySet()) {
+//            System.out.println(p.getKey() + ": " + p.getValue());
+//        }
 
 
         System.out.println("Q6=================");
 
         List<Integer> ages = MockData.getPeople()
-                .stream()
+                .stream().filter(p -> p.getGender().equals("Male"))
                 .map(person -> {
                     Date birthDate = null;
                     try {
@@ -101,15 +103,18 @@ public class Main {
 //        for (Integer age : ages) {
 //            System.out.print(age + " ");
 //        }
+//
+//        OptionalDouble averageAge = ages.stream()
+//                .mapToDouble(Integer::doubleValue)
+//                .average();
+//
+//        System.out.println(averageAge);
 
-        OptionalDouble averageAge = ages.stream()
-                .mapToDouble(Integer::doubleValue)
-                .average();
-
-        System.out.println(averageAge);
-
+        System.out.println("Q6======================");
+        System.out.println(maleAgeFormater(MockData.getPeople()));
 
     }
+
 
     private static Integer calculateAge(Date birthDate) {
         Date currentDate = new Date();
@@ -118,5 +123,19 @@ public class Main {
         long ageInMillis = 1000L * 60 * 60 * 24 * 365;
 
         return (int) (diff / ageInMillis);
+    }
+    public static OptionalDouble maleAgeFormater(List<Person> persons) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return persons.stream()
+                .filter(person -> person.getGender().equals("Male"))
+                .map(person -> {
+                    try {
+                        return new PersonSummary(person.getId(), person.getFirstName(), person.getLastName(),2023-( dateFormat.parse(person.getBirthDate()).getYear()+1900),  dateFormat.parse(person.getBirthDate()));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .map(PersonSummary::getAge)
+                .mapToDouble(Integer::doubleValue).average();
     }
 }
