@@ -88,3 +88,7 @@ read_menu(){
   esac
 }
 
+while true; do
+  show_menu
+  read_menu
+done
