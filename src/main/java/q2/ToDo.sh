@@ -55,3 +55,36 @@ add_pending_to_completed(){
   echo "Task Added to Completed."
   }
 
+read_menu(){
+  read option
+
+  case $option in
+    1)
+      show_not_done_tasks
+      ;;
+    2)
+      add_task
+      ;;
+    3)
+      show_deleted_tasks
+      ;;
+    4)
+      show_completed_tasks
+      ;;
+
+    5)
+      add_pending_to_completed
+     ;;
+    6)
+     delete_task
+     ;;
+    7)
+      echo "Exit."
+      exit 0
+      ;;
+    *)
+      echo "Enter a valid number."
+      ;;
+  esac
+}
+
